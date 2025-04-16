@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fatih Terim Profili</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Anton', sans-serif;
+      background: linear-gradient(135deg, #ffe29f, #ffa99f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2.2em;
+      font-weight: bold;
+      margin-bottom: 30px;
+      color: #222;
+    }
+    .button-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+    }
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      min-width: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .yes-btn {
+      background-color: #28a745;
+      color: white;
+      z-index: 10;
+      position: relative;
+    }
+    .no-btn {
+      background-color: #dc3545;
+      color: white;
+      position: relative;
+    }
+    .images {
+      margin-top: 30px;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+    .images a {
+      text-decoration: none;
+    }
+    .images img {
+      width: 90%;
+      max-width: 350px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .download-message {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #222;
+    }
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.5em;
+      }
+      button {
+        font-size: 16px;
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>FATİH TERİM PROFİL FOTOĞRAFI KOYMAK İSTER MİSİN ECE HANIM?</h1>
+  <div class="button-container">
+    <button class="yes-btn" onclick="showImages(); hideNoButton()">Evet</button>
+    <button class="no-btn" onclick="moveNoButton(this)" id="noBtn">
+      <i class="fas fa-xmark"></i> Hayır
+    </button>
+  </div>
+  <div class="images" id="imageContainer">
+    <a href="fatih1.png" download><img src="fatih1.png" alt="Fatih Terim 1"></a>
+    <a href="fatih2.png" download><img src="fatih2.png" alt="Fatih Terim 2"></a>
+    <a href="fatih3.png" download><img src="fatih3.png" alt="Fatih Terim 3"></a>
+    <div class="download-message">Bu fotoğrafı seçtiğiniz için Teşekkürler Ecem!</div>
+  </div>
+
+  <script>
+    function showImages() {
+      const container = document.getElementById("imageContainer");
+      container.style.display = "flex";
+    }
+
+    function hideNoButton() {
+      const noBtn = document.getElementById("noBtn");
+      noBtn.style.display = "none"; // Hayır tuşunu gizle
+    }
+
+    function moveNoButton(btn) {
+      const maxX = window.innerWidth - btn.offsetWidth;
+      const maxY = window.innerHeight - btn.offsetHeight;
+
+      const offset = 80; // Mesafeyi azalttım
+      const currentLeft = parseInt(btn.style.left) || 0;
+      const currentTop = parseInt(btn.style.top) || 0;
+
+      let newX = currentLeft + (Math.random() * offset * 2 - offset);
+      let newY = currentTop + (Math.random() * offset * 2 - offset);
+
+      newX = Math.max(0, Math.min(maxX, newX));
+      newY = Math.max(0, Math.min(maxY, newY));
+
+      btn.style.position = 'absolute';
+      btn.style.left = `${newX}px`;
+      btn.style.top = `${newY}px`;
+
+      // Buton kaymasını biraz yavaşlatmak için 200ms bekliyoruz
+      setTimeout(() => {
+        moveNoButton(btn); // Hızlı değil, biraz daha yavaş bir kayma sağlıyoruz
+      }, 200); // 200ms gibi daha uygun bir süre ile kaydırma
+    }
+
+    window.onload = () => {
+      const btn = document.getElementById("noBtn");
+      btn.style.left = "0px";
+      btn.style.top = "0px";
+    };
+  </script>
+</body>
+</html>
